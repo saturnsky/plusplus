@@ -1,7 +1,9 @@
 #-*- coding:utf-8 -*-
 
+import unicodedata
+
 class PlusPlus(object):
-    hanja_normal = set([u'零', u'一', u'二', u'三', u'四', u'五', u'六', u'七', u'八', u'九', u'十', u'百'])
+    hanja_normal = set([u'零', u'一', u'二', u'三', u'四', u'五', u'六', u'七', u'八', u'九', u'十', u'百'])
     hanja_difficult = set([u'壹', u'貳', u'參', u'拾'])
     roma_normal = set([u'i', u'v', 'x', 'l'])
     roma_capital_normal = set([u'I', u'V', u'X', 'L'])
@@ -108,7 +110,7 @@ class PlusPlus(object):
                             ,  3: u'三'
                             ,  4: u'四'
                             ,  5: u'五'
-                            ,  6: u'六'
+                            ,  6: u'六'
                             ,  7: u'七'
                             ,  8: u'八'
                             ,  9: u'九'
@@ -121,7 +123,7 @@ class PlusPlus(object):
                             ,  3: u'參'
                             ,  4: u'四'
                             ,  5: u'五'
-                            ,  6: u'六'
+                            ,  6: u'六'
                             ,  7: u'七'
                             ,  8: u'八'
                             ,  9: u'九'
@@ -244,6 +246,7 @@ class PlusPlus(object):
         else:
             src = raw_src
             encoding = None
+        src = unicodedata.normalize('NFC', src)
 
         result = cls.find_value(src)
         if result[2] != None:
