@@ -137,6 +137,8 @@ class PlusPlus(object):
             for char in src:
                 if hanja_rev_map[char] >= 10:
                     mode = 'has_unit'
+            if len(src) == 1:
+                mode = 'has_unit'
             
             if mode == 'has_unit':
                 value = 0
