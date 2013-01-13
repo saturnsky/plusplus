@@ -197,33 +197,41 @@ def process_value(src, mode):
                 if value[1] > 0: value[1] = -value[1]
                 value[1] += 5
         value = value[0] + value[1] * 10 + value[2] * 100 + 1
-        result = u''
-        while value:
-            if value >= 50:
-                result += 'L'
-                value -= 50
-                continue
-            if value >= 40:
-                result += 'XL'
-                value -= 40
-                continue
-            if value >= 10:
-                result += 'X'
-                value -= 10
-                continue
-            if value >= 5:
-                result += 'V'
-                value -= 5
-                continue
-            if value >= 4:
-                result += 'IV'
-                value -= 4
-                continue
-            if value >= 1:
-                result += 'I'
-                value -= 1
-                continue
-        if mode == roma_normal:
+
+        if value >= 90: # Current version do not support more than or equal 90
+            result = src
+        else:
+            result = u''
+            while value:
+                if value >= 50:
+                    result += 'L'
+                    value -= 50
+                    continue
+                if value >= 40:
+                    result += 'XL'
+                    value -= 40
+                    continue
+                if value >= 10:
+                    result += 'X'
+                    value -= 10
+                    continue
+                if value >= 9:
+                    result += 'IX'
+                    value -= 9
+                    continue
+                if value >= 5:
+                    result += 'V'
+                    value -= 5
+                    continue
+                if value >= 4:
+                    result += 'IV'
+                    value -= 4
+                    continue
+                if value >= 1:
+                    result += 'I'
+                    value -= 1
+                    continue
+        if mode == 'roma_normal':
             result = result.lower()
 
     if mode == 'roma_special' or mode == 'roma_capital_special':
