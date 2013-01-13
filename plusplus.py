@@ -239,10 +239,9 @@ def process_value(src, mode):
 
     return result
 
-def plusone(raw_src):
+def plusone(raw_src, encoding='utf-8'):
     if type(raw_src) is str:
-        src = raw_src.decode('utf-8')
-        encoding = 'utf-8'
+        src = raw_src.decode(encoding)
     else:
         src = raw_src
         encoding = None
