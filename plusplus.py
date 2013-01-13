@@ -241,7 +241,7 @@ def process_value(src, mode):
         else:
             roma = [u'Ⅰ', u'Ⅱ', u'Ⅲ', u'Ⅳ', u'Ⅴ', u'Ⅵ', u'Ⅶ', u'Ⅷ', u'Ⅸ', u'Ⅹ']
 
-        for i in xrange(0, 8):
+        for i in xrange(0, 9):
             if src == roma[i]:
                 result = roma[i + 1]
 
