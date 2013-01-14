@@ -16,20 +16,28 @@ roma_capital_special = set([u'Ⅰ', u'Ⅱ', u'Ⅲ', u'Ⅳ', u'Ⅴ', u'Ⅵ', u'�
 
 def find_hanja(src):
     start, end, position = -1, -1, -1
+    result = []
+
     mode = 'hanja_normal'
     for char in src:
         position += 1
         if char in hanja_normal or char in hanja_difficult:
             if end == position:
+                if char in hanja_difficult:
+                    mode = 'hanja_difficult'
                 end = position + 1
             else:
+                result.append([start, end, mode])
+
+                mode = 'hanja_difficult' if char in hanja_difficult else 'hanja_normal'
                 start, end = position, position + 1
-    for char in src[start:end]:
-        if char in hanja_difficult:
-            mode = 'hanja_difficult'
-    if start == -1:
-        mode = None
-    return start, end, mode
+
+    if start != -1:
+        result.append([start, end, mode])
+    else:
+        result = None
+
+    return result
 
 def find_roma(src):
     start, end, position = -1, -1, -1
@@ -80,6 +88,12 @@ def find_arabia(src):
 
 def find_value(src):
     result_hanja = find_hanja(src)
+
+    if result_hanja is None:
+        result_hanja = (-1, -1, None)
+    else:
+        result_hanja = result_hanja[-1]
+
     result_roma = find_roma(src)
     result_arabia = find_arabia(src)
     result = (-1, -1, None)
